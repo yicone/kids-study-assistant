@@ -1,0 +1,22 @@
+{
+  "name": "kids-math",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index2.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphviz": "0.0.9",
+    "node-echarts": "^1.1.4",
+    "ts-graphviz": "^0.16.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.5",
+    "@babel/preset-flow": "^7.16.7"
+  }
+}
