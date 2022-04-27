@@ -1,12 +1,20 @@
 var node_echarts = require('node-echarts');
 
-
+/**
+ * returns a random number between min and max.
+ * @param {number} min 
+ * @param {number} max 
+ * @returns {int}
+ */
 function _between(min, max) {
     return Math.floor(
         Math.random() * (max - min + 1) + min
     )
 }
 
+/**
+ * It generates a sequence of numbers that are not repeated and not adjacent.
+ */
 function gen_sequence(count = 4, max = 20) {
     var sequence = []
     for (var i = 0; i < count; i++) {
@@ -28,9 +36,31 @@ function getSymbol(value, params) {
     return arr[params.dataIndex];
 }
 
-function* build_series(seriesCount = 3) {
+/**
+ * 
+ */
+function* build_series({ seriesCount, sequenceCount, isContinues, mix } = { seriesCount: 3, sequenceCount: 4, isContinues: false, mix: false }) {
+    console.log('build_series', arguments)
     for (let serieIndex = 0; serieIndex < seriesCount; serieIndex++) {
-        var sequence = gen_sequence(count = 4)
+        var sequence = gen_sequence(count = sequenceCount)
+        const links = [
+            {
+                source: `${sequence[0]}`,
+                target: `${sequence[isContinues ? 1 : 2]}`
+            },
+            {
+                source: `${sequence[isContinues ? 1 : 3]}`,
+                target: `${sequence[isContinues ? 2 : 1]}`
+            }
+        ]
+
+        const yes = Math.round(Math.random() * 1)
+        if (mix && yes) {
+            links[0].target = `${sequence[2]}`
+            links[1].source = `${sequence[2]}`
+            links[1].target = `${sequence[1]}`
+        }
+
         console.log('sequence ' + serieIndex, sequence)
 
         var serie = {
@@ -56,16 +86,7 @@ function* build_series(seriesCount = 3) {
                     value: [num, 0]
                 }
             }),
-            links: [
-                {
-                    source: `${sequence[0]}`,
-                    target: `${sequence[2]}`
-                },
-                {
-                    source: `${sequence[3]}`,
-                    target: `${sequence[1]}`
-                }
-            ],
+            links: links,
             lineStyle: {
                 color: '#00000',
                 curveness: 0.2
@@ -75,7 +96,13 @@ function* build_series(seriesCount = 3) {
     } // end for
 }
 
-function gen(graphCount = 20) {
+/**
+ * 
+ * @param {*} param0 
+ */
+function gen({ seriesCount, sequenceCount, isContinues, mix } = { graphCount: 20, isContinues: false }) {
+    console.log('gen', arguments)
+    const series = build_series({ seriesCount, sequenceCount, isContinues, mix })
     var width = 280;
     var height = 100;
     var xAxisData = [...Array(21).keys()]
@@ -105,7 +132,7 @@ function gen(graphCount = 20) {
                 // data: [0]
             }
         }),
-        series: Array.from(build_series(count = graphCount))
+        series: Array.from(series)
     };
     console.log(echart_options.grid)
 
@@ -120,4 +147,4 @@ function gen(graphCount = 20) {
     node_echarts(config)
 }
 
-gen()
+gen({ seriesCount: 20, sequenceCount: 3, isContinues: true, mix: true })
