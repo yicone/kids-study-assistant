@@ -98,4 +98,4 @@ for (var i = 0; i < 10; i++) {
 
 console.log(g.to_dot());
 g.setGraphVizPath( "/usr/local/bin" );
-g.output( "ps2", "test01.ps" );
+g.output( "ps2", "output/test01.ps" );

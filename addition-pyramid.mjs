@@ -62,7 +62,7 @@ var config = {
   width: 794,
   height: 1123,
   option: echart_options,
-  path: 'pyramid.png',
+  path: 'output/addition-pyramid.png',
   enableAutoDispose: true
 }
 

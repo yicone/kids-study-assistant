@@ -106,7 +106,7 @@ function gen({ seriesCount, sequenceCount, isContinues, mix } = { graphCount: 20
     var width = 280;
     var height = 100;
     var xAxisData = [...Array(21).keys()]
-    var range = [...Array(graphCount).keys()]
+    var range = [...Array(seriesCount).keys()]
     var echart_options = {
         backgroundColor: '#fff',
 
@@ -140,7 +140,7 @@ function gen({ seriesCount, sequenceCount, isContinues, mix } = { graphCount: 20
         width: 794,
         height: 1123,
         option: echart_options,
-        path: 'graph.png', // TODO：HARDCODE
+        path: 'output/addition-ray-graph.png', // TODO：HARDCODE
         enableAutoDispose: true
     }
 

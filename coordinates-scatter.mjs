@@ -77,7 +77,7 @@ function gen() {
         width: 794,
         height: 1123,
         option: echart_options,
-        path: 'scatter.png', // TODO：HARDCODE
+        path: 'output/coordinates-scatter.png', // TODO：HARDCODE
         enableAutoDispose: true
     }
 
