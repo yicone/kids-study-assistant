@@ -13,7 +13,7 @@ function gen_sequence(count = 4, max = 20) {
 
         while (!sequence[i]) {
             var newNum = _between(1, max)
-            if (!sequence.includes(newNum)) {
+            if (!sequence.includes(newNum) && sequence.every(num => Math.abs(num - newNum) != 1)) {
                 sequence[i] = newNum
                 break;
             }
